@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform, View, TextInput, Text, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Platform, View, TextInput, Text, TouchableOpacity, ScrollView } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -9,31 +9,35 @@ import { Ionicons, MaterialIcons ,FontAwesome} from '@expo/vector-icons';
 
 export default function HomeScreen() {
   return (
-    <View style={styles.headerContainer}>
-      {/* Search Bar */}
-      <View style={styles.searchContainer}>
-        <Ionicons name="search" size={16} color="#666" style={styles.searchIcon} />
-        <TextInput
-          placeholder="Search Consignments"
-          placeholderTextColor="#666"
-          style={styles.searchInput}
-        />
-      </View>
-      {/* Balance Information */}
-      <Text style={styles.balanceText}>44.00 BDT</Text>
-      {/* Profile Image */}
-      <TouchableOpacity onPress={() => console.log('Image Pressed')}>
-        <Image
-          source={require('../../assets/images/car.png')}
-          style={styles.profileImage}
-        />
-      </TouchableOpacity>
-      {/* Notification Icon */}
-      <TouchableOpacity>
-        <FontAwesome name="bell" size={22} color="gray" style={styles.notificationIcon} />
-      </TouchableOpacity>
+    <ThemedView>
+      <ThemedView style={styles.headerContainer}>
+        {/* Search Bar */}
+        <ThemedView style={styles.searchContainer}>
+          <Ionicons name="search" size={16} color="#666" style={styles.searchIcon} />
+          <TextInput
+            placeholder="Search Consignments"
+            placeholderTextColor="#666"
+            style={styles.searchInput}
+          />
+        </ThemedView>
+        {/* Balance Information */}
+        <ThemedText style={styles.balanceText}>44.00 BDT</ThemedText>
+        {/* Profile Image */}
+        <TouchableOpacity onPress={() => console.log('Image Pressed')}>
+          <Image
+            source={require('../../assets/images/car.png')}
+            style={styles.profileImage}
+          />
+        </TouchableOpacity>
+        {/* Notification Icon */}
+        <TouchableOpacity>
+          <FontAwesome name="bell" size={22} color="gray" style={styles.notificationIcon} />
+        </TouchableOpacity>
+      </ThemedView>
+      <ThemedView style={styles.bodyContainer}>
 
-    </View>
+      </ThemedView>
+    </ThemedView>
   );
 }
 
@@ -78,5 +82,9 @@ const styles = StyleSheet.create({
   notificationIcon: {
     marginRight: 10,
     marginLeft: 10,
+  },
+  bodyContainer: {
+    backgroundColor: '#091242',
+    height:"100%"
   },
 });
