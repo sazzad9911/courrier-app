@@ -137,7 +137,8 @@ export default function AddParcel() {
             placeholder="Note"
             value={note}
             onChangeText={setNote}
-            style={styles.input}
+            style={[styles.input, styles.noteInput]} // Apply additional style for note input
+            multiline={true} // Allow multiline input
           />
 
           {/* Checkbox */}
@@ -259,6 +260,9 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     marginBottom: 12,
     color: '#000',
+  },
+  noteInput: {
+    height: 80, // Set the desired height for the Note input
   },
   checkboxContainer: {
     flexDirection: 'row',
