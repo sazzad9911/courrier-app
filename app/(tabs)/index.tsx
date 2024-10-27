@@ -252,9 +252,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 5,
     marginHorizontal: 5,
-    //justifyContent: 'center',
-    //alignItems: 'center',
-    height: 80,
   },
   iconContainer: {
     marginBottom: 10,

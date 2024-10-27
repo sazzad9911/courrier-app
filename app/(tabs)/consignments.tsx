@@ -1,15 +1,307 @@
-import { Image, StyleSheet, Platform, View, TextInput, Text, TouchableOpacity, ScrollView } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
+// app/consignments.tsx
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Dimensions, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { ThemedView } from '@/components/ThemedView';
-import { Ionicons, MaterialIcons ,FontAwesome} from '@expo/vector-icons';
+import { ThemedText } from '@/components/ThemedText';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
+const screenWidth = Dimensions.get('window').width;
+
+// Define the different scenes for each tab
+const AllScene = () => (
+  <ScrollView style={styles.scene}>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+  </ScrollView>
+);
+
+const PendingScene = () => (
+  <ScrollView style={styles.scene}>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+    <ThemedView style={styles.card}>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
+        <Text>2500 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',marginVertical:5,}}>
+        <Text>MD Safiul Alam</Text>
+        <Text>+ 70 BDT</Text>
+      </ThemedView>
+      <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
+        <Text style={{color:'gray'}}>19 Nov 2024</Text>
+        <Text style={{color:'#C08308'}}>Pending</Text>
+      </ThemedView>
+    </ThemedView>
+  </ScrollView>
+);
+
+const DeliveredScene = () => (
+  <ScrollView style={styles.scene}>
+    <ThemedText>Delivered Consignments</ThemedText>
+  </ScrollView>
+);
+
+const CancelledScene = () => (
+  <ScrollView style={styles.scene}>
+    <ThemedText>Cancelled Consignments</ThemedText>
+  </ScrollView>
+);
+
+const InReviewScene = () => (
+  <ScrollView style={styles.scene}>
+    <ThemedText>Consignments In Review</ThemedText>
+  </ScrollView>
+);
+
+const PickAndDropScene = () => (
+  <ScrollView style={styles.scene}>
+    <ThemedText>Pick & Drop Consignments</ThemedText>
+  </ScrollView>
+);
+
+// Map scene names to scenes
+const initialLayout = { width: Dimensions.get('window').width };
+const renderScene = SceneMap({
+  all: AllScene,
+  pending: PendingScene,
+  delivered: DeliveredScene,
+  cancelled: CancelledScene,
+  inReview: InReviewScene,
+  pickDrop: PickAndDropScene,
+});
 
 export default function Consignments() {
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    { key: 'all', title: 'All' },
+    { key: 'pending', title: 'Pending' },
+    { key: 'delivered', title: 'Delivered' },
+    { key: 'cancelled', title: 'Cancelled' },
+    { key: 'inReview', title: 'In Review' },
+    { key: 'pickDrop', title: 'Pick & Drop' },
+  ]);
+  const renderTabBar = (props: any) => (
+    <TabBar
+      {...props}
+         scrollEnabled={true}
+      style={styles.tabBar}
+      indicatorStyle={styles.indicator}
+      labelStyle={styles.label}
+     
+    />
+  );
+
   return (
-    <ThemedView>
+    <ThemedView style={{ flex: 1 }}>
+      {/* Header Section */}
       <ThemedView style={styles.headerContainer}>
         {/* Search Bar */}
         <ThemedView style={styles.searchContainer}>
@@ -34,23 +326,53 @@ export default function Consignments() {
           <FontAwesome name="bell" size={22} color="gray" style={styles.notificationIcon} />
         </TouchableOpacity>
       </ThemedView>
-      <ThemedView style={styles.bodyContainer}>
 
-      </ThemedView>
+      {/* Tab View */}
+      <TabView
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={initialLayout}
+        renderTabBar={renderTabBar}
+      />
     </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
-  
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#004d00', // Green background
+    backgroundColor: '#004d00',
     paddingHorizontal: 10,
-    //paddingVertical: 15,
     paddingTop: 25,
     paddingBottom: 5,
+  },
+  balanceText: {
+    color: '#fff',
+    fontSize: 12,
+    marginRight: 10,
+  },
+  notificationIcon: {
+    marginRight: 10,
+  },
+  tabBar: {
+    backgroundColor: '#004d00',
+  },
+  indicator: {
+    backgroundColor: '#ffffff',
+  },
+  label: {
+    color: '#ffffff',
+  },
+  scene: {
+    flex: 1,
+    //justifyContent: 'center',
+    //alignItems: 'center',
+    backgroundColor: '#091242',
+  },
+  tabLabel: {
+    color: '#ffffff',
   },
   searchContainer: {
     flexDirection: 'row',
@@ -68,23 +390,19 @@ const styles = StyleSheet.create({
     flex: 1,
     color: '#000',
   },
-  balanceText: {
-    color: '#fff',
-    fontSize: 12,
-    marginRight: 10,
-  },
   profileImage: {
     width: 30,
     height: 30,
     borderRadius: 35 / 2,
     marginRight: 10,
   },
-  notificationIcon: {
-    marginRight: 10,
-    marginLeft: 10,
-  },
-  bodyContainer: {
-    backgroundColor: '#091242',
-    height:"100%"
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 5,
+    marginHorizontal: 5,
+    height: 80,
+    marginTop:10,
+
   },
 });
