@@ -178,6 +178,13 @@ export default function HomeScreen() {
               </View>
           </View>
         </View>
+        <View style={styles.row4}>
+          <View style={styles.card4}>
+              <View style={{alignItems:'center',padding:5}}>
+                <Text style={{fontSize:15,color:'white'}}>Fraud Check</Text>
+              </View>
+          </View>
+        </View>
       </ThemedView>
       </ScrollView>
     </ThemedView>
@@ -306,15 +313,18 @@ const styles = StyleSheet.create({
   row4: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    
     marginBottom:10,
   },
   card4: {
-    flex: 1,
+    //flex: 1,
     //backgroundColor: '#EFE0C0',
     borderRadius: 10,
     padding: 5,
-    marginHorizontal: 5,
+    //marginHorizontal: 5,
+    
     height: 50,
+    width:'49%',
     borderWidth:1,
     borderColor: 'gray'
     
