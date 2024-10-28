@@ -301,32 +301,6 @@ export default function Consignments() {
 
   return (
     <ThemedView style={{ flex: 1 }}>
-      {/* Header Section */}
-      <ThemedView style={styles.headerContainer}>
-        {/* Search Bar */}
-        <ThemedView style={styles.searchContainer}>
-          <Ionicons name="search" size={16} color="#666" style={styles.searchIcon} />
-          <TextInput
-            placeholder="Search Consignments"
-            placeholderTextColor="#666"
-            style={styles.searchInput}
-          />
-        </ThemedView>
-        {/* Balance Information */}
-        <ThemedText style={styles.balanceText}>44.00 BDT</ThemedText>
-        {/* Profile Image */}
-        <TouchableOpacity onPress={() => console.log('Image Pressed')}>
-          <Image
-            source={require('../../assets/images/car.png')}
-            style={styles.profileImage}
-          />
-        </TouchableOpacity>
-        {/* Notification Icon */}
-        <TouchableOpacity>
-          <FontAwesome name="bell" size={22} color="gray" style={styles.notificationIcon} />
-        </TouchableOpacity>
-      </ThemedView>
-
       {/* Tab View */}
       <TabView
         navigationState={{ index, routes }}
@@ -340,19 +314,8 @@ export default function Consignments() {
 }
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#004d00',
-    paddingHorizontal: 10,
-    paddingTop: 25,
-    paddingBottom: 5,
-  },
-  balanceText: {
-    color: '#fff',
-    fontSize: 12,
-    marginRight: 10,
-  },
+  
+  
   notificationIcon: {
     marginRight: 10,
   },
@@ -373,28 +336,6 @@ const styles = StyleSheet.create({
   },
   tabLabel: {
     color: '#ffffff',
-  },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#e0e0e0', // Light gray background for the search bar
-    borderRadius: 20,
-    flex: 1,  // This ensures the search bar takes most of the width
-    marginRight: 20,
-    paddingHorizontal: 10,
-  },
-  searchIcon: {
-    marginRight: 5,
-  },
-  searchInput: {
-    flex: 1,
-    color: '#000',
-  },
-  profileImage: {
-    width: 30,
-    height: 30,
-    borderRadius: 35 / 2,
-    marginRight: 10,
   },
   card: {
     backgroundColor: '#fff',

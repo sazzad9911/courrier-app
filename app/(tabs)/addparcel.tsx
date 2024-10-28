@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Platform, View, TextInput, Text, TouchableOpacity, ScrollView,} from 'react-native';
 import Checkbox from 'expo-checkbox';
+import DropDownPicker from 'react-native-dropdown-picker'; // Import dropdown picker
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -16,37 +17,28 @@ export default function AddParcel() {
   const [name, setName] = useState('');
   const [invoice, setInvoice] = useState('');
   const [address, setAddress] = useState('');
-  const [district, setDistrict] = useState('');
+  const [district, setDistrict] = useState(null);
   const [thana, setThana] = useState('');
   const [weight, setWeight] = useState('');
   const [note, setNote] = useState('');
+  const [districts, setDistricts] = useState([
+    { label: 'Dhaka', value: 'dhaka' },
+    { label: 'Chittagong', value: 'chittagong' },
+    { label: 'Sylhet', value: 'sylhet' },
+    { label: 'Khulna', value: 'khulna' },
+    // Add more districts as needed
+  ]);
+  const [thanas, setThanas] = useState([
+    { label: 'Gulshan', value: 'gulshan' },
+    { label: 'Badda', value: 'badda' },
+    { label: 'Hatirjheel', value: 'hatirjheel' },
+    { label: 'Banani', value: 'banani' },
+    // Add more districts as needed
+  ]);
+  const [open, setOpen] = useState(false); // For dropdown control
+  const [open2, setOpen2] = useState(false);
   return (
-    <ThemedView style={{flex:1}}>
-      <ThemedView style={styles.headerContainer}>
-        {/* Search Bar */}
-        <ThemedView style={styles.searchContainer}>
-          <Ionicons name="search" size={16} color="#666" style={styles.searchIcon} />
-          <TextInput
-            placeholder="Search Consignments"
-            placeholderTextColor="#666"
-            style={styles.searchInput}
-          />
-        </ThemedView>
-        {/* Balance Information */}
-        <ThemedText style={styles.balanceText}>44.00 BDT</ThemedText>
-        {/* Profile Image */}
-        <TouchableOpacity onPress={() => console.log('Image Pressed')}>
-          <Image
-            source={require('../../assets/images/car.png')}
-            style={styles.profileImage}
-          />
-        </TouchableOpacity>
-        {/* Notification Icon */}
-        <TouchableOpacity>
-          <FontAwesome name="bell" size={22} color="gray" style={styles.notificationIcon} />
-        </TouchableOpacity>
-      </ThemedView>
-      <ScrollView>
+    <ScrollView style={{flex:1}}>
         <ThemedView style={styles.bodyContainer}>
             {/* Selection Options */}
           <View style={styles.optionsContainer}>
@@ -115,17 +107,32 @@ export default function AddParcel() {
             onChangeText={setAddress}
             style={styles.input}
           />
-          <TextInput
-            placeholder="District"
+          {/* District Dropdown */}
+          <DropDownPicker
+            open={open}
             value={district}
-            onChangeText={setDistrict}
-            style={styles.input}
+            items={districts}
+            setOpen={setOpen}
+            setValue={setDistrict}
+            setItems={setDistricts}
+            placeholder="Select District"
+            style={styles.dropdown} // Optional custom styles
+            textStyle={{ color: '#000' }} // Set dropdown text color
+            dropDownContainerStyle={{ backgroundColor: '#E0E0E0' }}
           />
-          <TextInput
-            placeholder="Thana"
+          {/* Thana Dropdown */}
+          <DropDownPicker
+            open={open2}
             value={thana}
-            onChangeText={setThana}
-            style={styles.input}
+            items={thanas}
+            setOpen={setOpen2}
+            setValue={setThana}
+            setItems={setThanas}
+            placeholder="Select Thana"
+            style={styles.dropdown} // Optional custom styles
+            textStyle={{ color: '#000' }} // Set dropdown text color
+            dropDownContainerStyle={{ backgroundColor: '#E0E0E0' }}
+            zIndex={4}
           />
           <TextInput
             placeholder="Weight"
@@ -157,53 +164,12 @@ export default function AddParcel() {
           </TouchableOpacity>
 
         </ThemedView>
-      </ScrollView>
-    </ThemedView>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  
-  headerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#004d00', // Green background
-    paddingHorizontal: 10,
-    //paddingVertical: 15,
-    paddingTop: 25,
-    paddingBottom: 5,
-  },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#e0e0e0', // Light gray background for the search bar
-    borderRadius: 20,
-    flex: 1,  // This ensures the search bar takes most of the width
-    marginRight: 20,
-    paddingHorizontal: 10,
-  },
-  searchIcon: {
-    marginRight: 5,
-  },
-  searchInput: {
-    flex: 1,
-    color: '#000',
-  },
-  balanceText: {
-    color: '#fff',
-    fontSize: 12,
-    marginRight: 10,
-  },
-  profileImage: {
-    width: 30,
-    height: 30,
-    borderRadius: 35 / 2,
-    marginRight: 10,
-  },
-  notificationIcon: {
-    marginRight: 10,
-    marginLeft: 10,
-  },
+
   bodyContainer: {
     backgroundColor: '#091242',
     height:"100%",
@@ -284,5 +250,10 @@ const styles = StyleSheet.create({
   submitButtonText: {
     color: '#000000',
     fontWeight: 'bold',
+  },
+  dropdown: {
+    backgroundColor: '#E0E0E0',
+    borderRadius: 8,
+    marginBottom: 12,
   },
 });
