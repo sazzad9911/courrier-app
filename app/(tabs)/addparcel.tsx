@@ -5,8 +5,6 @@ import DropDownPicker from 'react-native-dropdown-picker'; // Import dropdown pi
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { Ionicons, MaterialIcons ,FontAwesome} from '@expo/vector-icons';
-
 
 export default function AddParcel() {
   const [isChecked, setChecked] = useState(false);
