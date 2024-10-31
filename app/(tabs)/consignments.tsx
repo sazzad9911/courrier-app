@@ -11,7 +11,7 @@ const screenWidth = Dimensions.get('window').width;
 // Define the different scenes for each tab
 const AllScene = () => (
   <ScrollView style={styles.scene}>
-    <ThemedView style={styles.card}>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -24,8 +24,8 @@ const AllScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -38,8 +38,8 @@ const AllScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -52,8 +52,8 @@ const AllScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -66,8 +66,8 @@ const AllScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -80,8 +80,8 @@ const AllScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -94,8 +94,8 @@ const AllScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -108,8 +108,8 @@ const AllScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -122,13 +122,13 @@ const AllScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
+    </TouchableOpacity>
   </ScrollView>
 );
 
 const PendingScene = () => (
   <ScrollView style={styles.scene}>
-    <ThemedView style={styles.card}>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -141,8 +141,8 @@ const PendingScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -155,8 +155,8 @@ const PendingScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -169,8 +169,8 @@ const PendingScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -183,8 +183,8 @@ const PendingScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -197,8 +197,8 @@ const PendingScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -211,8 +211,8 @@ const PendingScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -225,8 +225,8 @@ const PendingScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
-    <ThemedView style={styles.card}>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.card}>
       <ThemedView style={{flexDirection:'row',justifyContent:'space-between',}}>
         <Text style={{color:'gray'}}>Tracking Code: 1674932</Text>
         <Text>2500 BDT</Text>
@@ -239,7 +239,7 @@ const PendingScene = () => (
         <Text style={{color:'gray'}}>19 Nov 2024</Text>
         <Text style={{color:'#C08308'}}>Pending</Text>
       </ThemedView>
-    </ThemedView>
+    </TouchableOpacity>
   </ScrollView>
 );
 

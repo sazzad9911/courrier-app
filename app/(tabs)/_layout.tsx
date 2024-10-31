@@ -14,7 +14,7 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <Tabs
+    <Tabs 
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
@@ -38,6 +38,7 @@ export default function TabLayout() {
           ),
          
         }}
+
         
       />
       <Tabs.Screen
@@ -68,5 +69,6 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
+    
   );
 }

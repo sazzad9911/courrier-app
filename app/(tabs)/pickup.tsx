@@ -41,7 +41,13 @@ export default function PickUp() {
   const [parcels, setParcels] = useState([
     { label: 'Small', value: 'small' },
     { label: 'Medium', value: 'medium' },
-    { label: 'Large', value: 'large' },
+    { label: 'large', value: 'large' },
+    { label: 'large', value: 'large' },
+    { label: 'large', value: 'large' },
+    { label: 'large', value: 'large' },
+    { label: 'Medium', value: 'medium' },
+    { label: 'large', value: 'large' },
+    // Add more districts as needed
     // Add more districts as needed
   ]);
   const [open, setOpen] = useState(false); // For dropdown control
