@@ -1,6 +1,7 @@
-import { View, Text, ScrollView, StyleSheet, Image } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { ThemedView } from '@/components/ThemedView'
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function print() {
   return (
@@ -52,6 +53,21 @@ export default function print() {
                     <Text style={{ color: 'white',fontWeight:'bold' }}>2500 BDT</Text>
                   </Text>
         </View>
+        <View style={{flexDirection:'row',alignSelf:'center'}}>
+          <Image
+                  source={require('../assets/images/logogb.png')}
+                  //style={styles.profileImage}
+                />
+          <Text style={{color:'white',fontSize:20,marginLeft:10}}>Green Bangla</Text>
+        </View>
+        <Text style={{fontSize:12,color:'gray',alignSelf:'center',marginVertical:4}}>www.greenbangla.courier</Text>
+        <Text style={{fontSize:12,color:'gray',alignSelf:'center'}}>19 July 2025 at 12:40 pm</Text>
+        <TouchableOpacity style={{borderWidth:1,height:30, width:'23%',backgroundColor:'#F6B426',alignSelf:'center',justifyContent:'center',paddingHorizontal:10,borderRadius:7,marginTop:50}}>
+          <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+            <AntDesign name="printer" size={18} color="black" />
+            <Text style={{fontSize:14,color:'black',marginLeft:7}}>Print</Text>
+          </View>
+        </TouchableOpacity>
       </ThemedView>
     </ScrollView>
   )
@@ -73,12 +89,6 @@ const styles = StyleSheet.create({
     alignSelf:'center',
   },
   codeImage: {
-    marginTop:10,
-    marginBottom:20,
-    alignItems:'center',
-    alignSelf:'center',
-  },
-  qrImage: {
     marginTop:10,
     marginBottom:20,
     alignItems:'center',

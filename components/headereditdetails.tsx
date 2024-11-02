@@ -5,13 +5,15 @@ import { ThemedView } from '@/components/ThemedView';
 import { FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { router } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function header() {
+  const navigation = useNavigation();
   return (
     <View style={styles.headerContainer}>
       <View style={{flexDirection:'row',}}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
             <AntDesign name="left" size={24} color="white" />
         </TouchableOpacity>
         <Text style={{color:'white',fontSize:16,marginLeft:10}}>Edit Parcel Details</Text>
