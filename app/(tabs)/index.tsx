@@ -91,75 +91,75 @@ export default function HomeScreen() {
           <Text style={{color:'white',fontSize:16,marginVertical:10,}}>Options</Text>
         </View>
         <View style={styles.row2}>
-          <View style={styles.card2}>
+          <TouchableOpacity style={styles.card2}>
               <View style={styles.cardstyle}>
                 <MaterialIcons name="request-page" size={24} color="green" />
                 <Text style={{fontSize:15,}}>Payment Request</Text>
               </View>
-          </View>
-          <View style={styles.card2}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.card2}>
               <View style={styles.cardstyle}>
                 <FontAwesome name="headphones" size={24} color="blue" />
                 <Text style={{fontSize:15,}}>Customer Support</Text>
               </View>
-          </View>
+          </TouchableOpacity>
         </View>
         <Text style={{fontSize:16, color:'white',marginVertical:10,}}>Informations</Text>
         <View style={styles.row3}>
-          <View style={styles.card3}>
+          <TouchableOpacity style={styles.card3}>
               <View style={{alignItems:'center',padding:5}}>
                 <Text style={{fontSize:15,}}>Payments</Text>
               </View>
-          </View>
-          <View style={styles.card3}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.card3}>
               <View style={{alignItems:'center',padding:5}}>
                 <Text style={{fontSize:15,}}>Customer Support</Text>
               </View>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.row3}>
-          <View style={styles.card3}>
+          <TouchableOpacity style={styles.card3}>
               <View style={{alignItems:'center',padding:5}}>
                 <Text style={{fontSize:15,}}>Status</Text>
               </View>
-          </View>
-          <View style={styles.card3}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.card3}>
               <View style={{alignItems:'center',padding:5}}>
                 <Text style={{fontSize:15,}}>Amount Charge</Text>
               </View>
-          </View>
+          </TouchableOpacity>
         </View>
         <Text style={{fontSize:16, color:'white',marginVertical:10,}}>Reports</Text>
         <View style={styles.row4}>
-          <View style={styles.card4}>
+          <TouchableOpacity style={styles.card4}>
               <View style={{alignItems:'center',padding:5}}>
                 <Text style={{fontSize:15,color:'white'}}>Pending Parcel</Text>
               </View>
-          </View>
-          <View style={styles.card4}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.card4}>
               <View style={{alignItems:'center',padding:5}}>
                 <Text style={{fontSize:15,color:'white'}}>Today's Cancelled</Text>
               </View>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.row4}>
-          <View style={styles.card4}>
+          <TouchableOpacity style={styles.card4}>
               <View style={{alignItems:'center',padding:5}}>
                 <Text style={{fontSize:15,color:'white'}}>Latest Return</Text>
               </View>
-          </View>
-          <View style={styles.card4}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.card4}>
               <View style={{alignItems:'center',padding:5}}>
                 <Text style={{fontSize:15,color:'white'}}>Cancellation Request</Text>
               </View>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.row4}>
-          <View style={styles.card4}>
+          <TouchableOpacity style={styles.card4}>
               <View style={{alignItems:'center',padding:5}}>
                 <Text style={{fontSize:15,color:'white'}}>Fraud Check</Text>
               </View>
-          </View>
+          </TouchableOpacity>
         </View>
       </ThemedView>
       </ScrollView>
