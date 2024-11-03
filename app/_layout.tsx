@@ -8,6 +8,9 @@ import Header from '../components/header'; // Adjust the path according to your 
 import Headerparcel from '../components/headerparcel';
 import Headerprint from '../components/headerprint';
 import Headereditdetails from '../components/headereditdetails';
+import Headercancel from '@/components/headercancel';
+import Headerfraud from '@/components/headerfraud';
+import Headerreturn from '@/components/headerreturn';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { StatusBar } from 'expo-status-bar';
@@ -42,6 +45,9 @@ export default function RootLayout() {
         <Stack.Screen name="parceldetails" options={{ header:()=><Headerparcel />}} />
         <Stack.Screen name="print" options={{ header:()=><Headerprint />}} />
         <Stack.Screen name="editdetails" options={{ header:()=><Headereditdetails />}} />
+        <Stack.Screen name="cancelrequest" options={{ header:()=><Headercancel />}} />
+        <Stack.Screen name="fraudcheck" options={{ header:()=><Headerfraud />}} />
+        <Stack.Screen name="returnlist" options={{ header:()=><Headerreturn />}} />
       </Stack>
     </ThemeProvider>
   );

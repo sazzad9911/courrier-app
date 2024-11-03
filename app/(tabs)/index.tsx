@@ -5,6 +5,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Ionicons, MaterialIcons ,FontAwesome} from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 
 export default function HomeScreen() {
@@ -143,19 +144,25 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
         <View style={styles.row4}>
-          <TouchableOpacity style={styles.card4}>
+          <TouchableOpacity style={styles.card4}
+          onPress={() => router.push({ pathname: "/returnlist" })}
+          >
               <View style={{alignItems:'center',padding:5}}>
                 <Text style={{fontSize:15,color:'white'}}>Latest Return</Text>
               </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.card4}>
+          <TouchableOpacity style={styles.card4} 
+          onPress={() => router.push({ pathname: "/cancelrequest" })}
+          >
               <View style={{alignItems:'center',padding:5}}>
                 <Text style={{fontSize:15,color:'white'}}>Cancellation Request</Text>
               </View>
           </TouchableOpacity>
         </View>
         <View style={styles.row4}>
-          <TouchableOpacity style={styles.card4}>
+          <TouchableOpacity style={styles.card4} 
+          onPress={() => router.push({ pathname: "/fraudcheck" })}
+          >
               <View style={{alignItems:'center',padding:5}}>
                 <Text style={{fontSize:15,color:'white'}}>Fraud Check</Text>
               </View>
