@@ -1,6 +1,6 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
@@ -11,6 +11,7 @@ import Headereditdetails from '../components/headereditdetails';
 import Headercancel from '@/components/headercancel';
 import Headerfraud from '@/components/headerfraud';
 import Headerreturn from '@/components/headerreturn';
+import login from './login';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { StatusBar } from 'expo-status-bar';
@@ -20,6 +21,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
@@ -29,6 +31,7 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
+  
 
   if (!loaded) {
     return null;
@@ -40,6 +43,54 @@ export default function RootLayout() {
 
       </StatusBar>
       <Stack>
+      <Stack.Screen 
+          name="login" 
+          options={{
+            //headerStyle: { backgroundColor: '#091242' },
+            //headerTintColor: '#fff', // Sets the header text color to white
+            headerShown: false,
+          }} 
+        />
+        <Stack.Screen 
+          name="signup" 
+          options={{
+            //headerStyle: { backgroundColor: '#091242' },
+            //headerTintColor: '#fff', // Sets the header text color to white
+            headerShown: false,
+          }} 
+        />
+        <Stack.Screen 
+          name="otp" 
+          options={{
+            //headerStyle: { backgroundColor: '#091242' },
+            //headerTintColor: '#fff', // Sets the header text color to white
+            headerShown: false,
+          }} 
+        />
+        <Stack.Screen 
+          name="forgetpassword" 
+          options={{
+            //headerStyle: { backgroundColor: '#091242' },
+            //headerTintColor: '#fff', // Sets the header text color to white
+            headerShown: false,
+          }} 
+        />
+        <Stack.Screen 
+          name="forgetpasswordotp" 
+          options={{
+            //headerStyle: { backgroundColor: '#091242' },
+            //headerTintColor: '#fff', // Sets the header text color to white
+            headerShown: false,
+          }} 
+        />
+        <Stack.Screen 
+          name="newpassword" 
+          options={{
+            //headerStyle: { backgroundColor: '#091242' },
+            //headerTintColor: '#fff', // Sets the header text color to white
+            headerShown: false,
+          }} 
+        />
         <Stack.Screen name="(tabs)" options={{ header:()=><Header />}} />
         <Stack.Screen name="+not-found" />
         <Stack.Screen name="parceldetails" options={{ header:()=><Headerparcel />}} />

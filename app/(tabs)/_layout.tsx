@@ -1,5 +1,5 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Redirect, Tabs, useRouter } from 'expo-router';
+import React, { useEffect } from 'react';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -12,6 +12,12 @@ import { Text } from 'react-native';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const router = useRouter();
+  useEffect(() => {
+  //  router.replace('/login'); 
+  }, []);
+
+  return  <Redirect href="/login" />;
 
   return (
     <Tabs 
