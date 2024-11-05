@@ -2,6 +2,8 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, Modal, Button } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Entypo from "@expo/vector-icons/Entypo";
 
 interface AlertDialogProps {
   visible: boolean;
@@ -19,8 +21,8 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
   useEffect(() => {
     if (visible) {
       const timer = setTimeout(() => {
-        //onClose();
-      }, 3000); // Auto-close after 3 seconds
+        onClose();
+      }, 2000); // Auto-close after 3 seconds
       return () => clearTimeout(timer); // Cleanup the timer on unmount or when `visible` changes
     }
   }, [visible, onClose]);
@@ -47,12 +49,25 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
     >
       <View style={styles.overlay}>
         <View style={[styles.container, getAlertStyle()]}>
-          <AntDesign onPress={onClose} style={{
-            position:'absolute',
-            right:2
-          }} name="closecircle" size={24} color="black" />
+          <AntDesign
+            onPress={onClose}
+            style={{
+              position: "absolute",
+              right: -4,
+              top: -6,
+            }}
+            name="closecircle"
+            size={28}
+            color="red"
+          />
+          {type === "success" ? (
+            <AntDesign name="checkcircle" size={24} color="green" />
+          ) : type === "error" ? (
+            <MaterialIcons name="error" size={24} color="red" />
+          ) : (
+            <Entypo name="warning" size={24} color="black" />
+          )}
           <Text style={styles.message}>{message}</Text>
-          
         </View>
       </View>
     </Modal>
@@ -77,6 +92,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10,
     textAlign: "center",
+    marginTop: 2,
   },
   success: {
     backgroundColor: "#d4edda",

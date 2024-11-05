@@ -95,7 +95,8 @@ export default function Login() {
           </Text>
         </TouchableOpacity>
         {/* Submit Button */}
-        <TouchableOpacity onPress={handleLogin} style={styles.submitButton}>
+        <TouchableOpacity disabled={!email||!password} onPress={handleLogin} style={[styles.submitButton,
+          {backgroundColor:!email||!password?"gray":"#FFB82B"}]}>
           <Text style={styles.submitButtonText}>Sign In</Text>
         </TouchableOpacity>
         {/* Sign Up Link */}

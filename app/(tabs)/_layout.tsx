@@ -1,35 +1,37 @@
-import { Redirect, Tabs, useRouter } from 'expo-router';
-import React, { useEffect } from 'react';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { Redirect, Tabs, useRouter } from "expo-router";
+import React, { useEffect } from "react";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { Text } from 'react-native';
+import { TabBarIcon } from "@/components/navigation/TabBarIcon";
+import { Colors } from "@/constants/Colors";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { Text } from "react-native";
+import { useAuth } from "@/providers/AuthContext";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const router = useRouter();
-  useEffect(() => {
-  //  router.replace('/login'); 
-  }, []);
+  const { isAuthenticated } = useAuth();
 
-  return  <Redirect href="/login" />;
+  if (!isAuthenticated) {
+    return <Redirect href="/login" />;
+  }
 
   return (
-    <Tabs 
+    <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
-        tabBarStyle: { backgroundColor: '#224B26' },
-      }}>
+        tabBarStyle: { backgroundColor: "#224B26" },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Dashboard',
+          title: "Dashboard",
           tabBarIcon: ({ color, focused }) => (
             <MaterialIcons name="dashboard" color={color} size={24} />
           ),
@@ -38,19 +40,16 @@ export default function TabLayout() {
       <Tabs.Screen
         name="addparcel"
         options={{
-          title: 'Add Parcel',
+          title: "Add Parcel",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name="bag-add" color={color} size={24} />
           ),
-         
         }}
-
-        
       />
       <Tabs.Screen
         name="consignments"
         options={{
-          title: 'Consignments',
+          title: "Consignments",
           tabBarIcon: ({ color, focused }) => (
             <AntDesign name="bars" color={color} size={24} />
           ),
@@ -59,7 +58,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="pickup"
         options={{
-          title: 'Pick Up',
+          title: "Pick Up",
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons name="car-pickup" color={color} size={30} />
           ),
@@ -68,7 +67,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="pricing"
         options={{
-          title: 'Pricing',
+          title: "Pricing",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name="calculator" color={color} size={24} />
           ),
