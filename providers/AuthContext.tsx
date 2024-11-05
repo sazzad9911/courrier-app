@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getApi } from "@/constants/API";
+import Loader from "@/components/Loader";
 
 interface User {
   id: string;
@@ -41,6 +42,7 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [isLoading,setIsLoading]=useState(true)
 
   const login = async (userData: User, authToken: string) => {
     setUser(userData);
@@ -76,6 +78,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUser(JSON.parse(storedUser));
       setToken(storedToken);
     }
+    setIsLoading(false)
   };
 
   useEffect(() => {
@@ -93,7 +96,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         reload
       }}
     >
-      {children}
+      {isLoading?(<Loader visible/>):children}
     </AuthContext.Provider>
   );
 };
