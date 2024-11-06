@@ -17,6 +17,8 @@ export default function AddParcel() {
   const [address, setAddress] = useState('');
   const [district, setDistrict] = useState(null);
   const [thana, setThana] = useState('');
+  const [district1, setDistrict1] = useState(null);
+  const [thana1, setThana1] = useState('');
   const [weight, setWeight] = useState('');
   const [note, setNote] = useState('');
   const [districts, setDistricts] = useState([
@@ -33,11 +35,34 @@ export default function AddParcel() {
     { label: 'Banani', value: 'banani' },
     // Add more districts as needed
   ]);
+  const [districts1, setDistricts1] = useState([
+    { label: 'Dhaka', value: 'dhaka' },
+    { label: 'Chittagong', value: 'chittagong' },
+    { label: 'Sylhet', value: 'sylhet' },
+    { label: 'Khulna', value: 'khulna' },
+    // Add more districts as needed
+  ]);
+  const [thanas1, setThanas1] = useState([
+    { label: 'Gulshan', value: 'gulshan' },
+    { label: 'Badda', value: 'badda' },
+    { label: 'Hatirjheel', value: 'hatirjheel' },
+    { label: 'Banani', value: 'banani' },
+    // Add more districts as needed
+  ]);
   const [open, setOpen] = useState(false); // For dropdown control
   const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false); // For dropdown control
+  const [open4, setOpen4] = useState(false);
   return (
     <ScrollView style={{flex:1}}>
         <ThemedView style={styles.bodyContainer}>
+          <Text style={{fontSize:20,color:'white',alignSelf:'center',marginVertical:10}}>Add Parcel</Text>
+          <Text style={{fontSize:12,color:'white',alignSelf:'center'}}>Enjoy the convenience of parcel pickup right from your </Text>
+          <Text style={{fontSize:12,color:'white',alignSelf:'center',marginVertical:3}}>doorstep! Schedule your pickup, and we’ll handle the rest</Text>
+          <Text style={{ color: 'white', fontSize: 12 ,alignSelf:'center'}}>
+                for a hassle-free experience. Pick Up time{' '}
+                <Text style={{ color: '#F6B426' }}>9am to 12pm</Text>
+              </Text>
             {/* Selection Options */}
           <View style={styles.optionsContainer}>
             <TouchableOpacity
@@ -73,6 +98,59 @@ export default function AddParcel() {
             </TouchableOpacity>
           ))}
         </View>
+        {/* Radio Options */}
+        <View style={styles.radioContainer}>
+          {['Home PickUp  ', 'Point PickUp'].map(option => (
+            <TouchableOpacity 
+              key={option} 
+              style={styles.radioOption} 
+              onPress={() => setSelectedDeliveryMethod(option)} // Update state on press
+            >
+              <View style={[styles.radioCircle, selectedDeliveryMethod === option && styles.radioSelected]} />
+              <Text style={styles.radioText}>{option}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+        <TextInput
+            placeholder="Your Phone Number"
+            value={phoneNumber}
+            onChangeText={setPhoneNumber}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Your Address"
+            value={address}
+            onChangeText={setAddress}
+            style={styles.input}
+          />
+          {/* District Dropdown */}
+          <DropDownPicker
+            open={open}
+            value={district}
+            items={districts}
+            setOpen={setOpen}
+            setValue={setDistrict}
+            setItems={setDistricts}
+            placeholder="Select District"
+            style={styles.dropdown} // Optional custom styles
+            textStyle={{ color: '#000' }} // Set dropdown text color
+            dropDownContainerStyle={{ backgroundColor: '#E0E0E0' }}
+          />
+          {/* Thana Dropdown */}
+          <DropDownPicker
+            open={open2}
+            value={thana}
+            items={thanas}
+            setOpen={setOpen2}
+            setValue={setThana}
+            setItems={setThanas}
+            placeholder="Select Thana"
+            style={styles.dropdown} // Optional custom styles
+            textStyle={{ color: '#000' }} // Set dropdown text color
+            dropDownContainerStyle={{ backgroundColor: '#E0E0E0' }}
+            zIndex={4}
+          />
+        <Text style={{color:'white',fontSize:14,marginBottom:12,marginLeft:5}}>Parcel & Customer Info</Text>
 
           {/* Form Fields */}
           <TextInput
@@ -107,12 +185,12 @@ export default function AddParcel() {
           />
           {/* District Dropdown */}
           <DropDownPicker
-            open={open}
-            value={district}
-            items={districts}
-            setOpen={setOpen}
-            setValue={setDistrict}
-            setItems={setDistricts}
+            open={open3}
+            value={district1}
+            items={districts1}
+            setOpen={setOpen3}
+            setValue={setDistrict1}
+            setItems={setDistricts1}
             placeholder="Select District"
             style={styles.dropdown} // Optional custom styles
             textStyle={{ color: '#000' }} // Set dropdown text color
@@ -120,12 +198,12 @@ export default function AddParcel() {
           />
           {/* Thana Dropdown */}
           <DropDownPicker
-            open={open2}
-            value={thana}
-            items={thanas}
-            setOpen={setOpen2}
-            setValue={setThana}
-            setItems={setThanas}
+            open={open4}
+            value={thana1}
+            items={thanas1}
+            setOpen={setOpen4}
+            setValue={setThana1}
+            setItems={setThanas1}
             placeholder="Select Thana"
             style={styles.dropdown} // Optional custom styles
             textStyle={{ color: '#000' }} // Set dropdown text color
@@ -177,7 +255,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     //justifyContent: 'space-between',
     marginBottom: 16,
-    marginTop:16
+    marginTop:25
   },
   optionButton: {
     padding: 8,
@@ -210,6 +288,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#FF9900',
     marginRight: 8,
+    
   },
   radioSelected: {
     backgroundColor: '#FF9900',

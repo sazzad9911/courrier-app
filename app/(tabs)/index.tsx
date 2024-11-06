@@ -159,15 +159,6 @@ export default function HomeScreen() {
               </View>
           </TouchableOpacity>
         </View>
-        <View style={styles.row4}>
-          <TouchableOpacity style={styles.card4} 
-          onPress={() => router.push({ pathname: "/fraudcheck" })}
-          >
-              <View style={{alignItems:'center',padding:5}}>
-                <Text style={{fontSize:15,color:'white'}}>Fraud Check</Text>
-              </View>
-          </TouchableOpacity>
-        </View>
       </ThemedView>
       </ScrollView>
     </ThemedView>
