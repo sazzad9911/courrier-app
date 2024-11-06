@@ -3,6 +3,7 @@ import React from 'react'
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 
 export default function header() {
@@ -21,7 +22,7 @@ export default function header() {
         {/* Balance Information */}
         <ThemedText style={styles.balanceText}>44.00 BDT</ThemedText>
         {/* Profile Image */}
-        <TouchableOpacity onPress={() => console.log('Image Pressed')}>
+        <TouchableOpacity onPress={() => router.push({ pathname: "/profile" })}>
           <Image
             source={require('../assets/images/car.png')}
             style={styles.profileImage}
