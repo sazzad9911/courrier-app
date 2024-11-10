@@ -27,7 +27,7 @@ export default function header() {
         {/* Profile Image */}
         <TouchableOpacity onPress={() => router.push({ pathname: "/profile" })}>
           <Image
-            source={user?.image?user.image:require('../assets/images/user.png')}
+            source={user?.image?{uri:user.image}:require('../assets/images/user.png')}
             style={styles.profileImage}
           />
         </TouchableOpacity>
