@@ -1,13 +1,40 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import React from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import React, { useState } from 'react';
 import { AntDesign, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { router, useNavigation } from 'expo-router';
 import { useAuth } from '@/providers/AuthContext';
+import * as ImagePicker from 'expo-image-picker';
 
 export default function Profile() {
     const navigation = useNavigation();
-    const {user}=useAuth()
-  
+    const { user } = useAuth();
+    
+    // State to store the selected profile image URI
+    const [profileImageUri, setProfileImageUri] = useState(require('../assets/images/user.png'));
+
+    // Function to handle image picking and updating the profile picture
+    const handleImagePick = async () => {
+        // Request permission to access the media library
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+            Alert.alert('Permission Denied', 'You need to grant permission to change the profile picture.');
+            return;
+        }
+
+        // Launch the image picker
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [1, 1], // Square aspect ratio
+            quality: 1,
+        });
+
+        // Update the profile image if an image is selected
+        if (!result.canceled && result.assets && result.assets.length > 0) {
+            setProfileImageUri({ uri: result.assets[0].uri });
+        }
+    };
+
     return (
         <View style={styles.container}>
             {/* Background image */}
@@ -27,85 +54,68 @@ export default function Profile() {
             {/* Profile Image below the background */}
             <View style={styles.profileImageContainer}>
                 <Image
-                    source={require('../assets/images/user.png')}
+                    source={profileImageUri} // Dynamically change image source
                     style={styles.profileImage}
                 />
-                <TouchableOpacity style={styles.cameraIconContainer}>
+                <TouchableOpacity style={styles.cameraIconContainer} onPress={handleImagePick}>
                     <Ionicons name="camera" size={12} color="white" />
                 </TouchableOpacity>
             </View>
-            <Text style={{fontSize:18,color:'white',alignSelf:'center',marginTop:20}}>MD Sagor Ali</Text>
-            <Text style={{fontSize:14,color:'gray',alignSelf:'center',marginTop:4}}>Banglamart Ecommerce Limited</Text>
-            <View style={{marginVertical:10,borderWidth:1,height:45,width:'80%',alignSelf:'center',borderRadius:7,borderColor:'gray',padding:5,justifyContent:'center',}}>
-               <View style={{marginHorizontal:5,flexDirection:'row',alignContent:'space-between',justifyContent:'space-between'}}>
-                <View style={{flexDirection:'row',}}>
-                    <Text style={{fontSize:14,color:'white'}}>259</Text>
-                    <Text style={{fontSize:14,color:'gray',marginLeft:4}}>Delivery</Text>
+
+            <Text style={{fontSize:18, color:'white', alignSelf:'center', marginTop:20}}>MD Sagor Ali</Text>
+            <Text style={{fontSize:14, color:'gray', alignSelf:'center', marginTop:4}}>Banglamart Ecommerce Limited</Text>
+
+            {/* User stats */}
+            <View style={styles.statsContainer}>
+                <View style={styles.statItem}>
+                    <Text style={{fontSize:14, color:'white'}}>259</Text>
+                    <Text style={{fontSize:14, color:'gray', marginLeft:4}}>Delivery</Text>
                 </View>
-                <View style={{flexDirection:'row',}}>
-                    <Text style={{fontSize:14,color:'white'}}>259</Text>
-                    <Text style={{fontSize:14,color:'gray',marginLeft:4}}>Pending</Text>
+                <View style={styles.statItem}>
+                    <Text style={{fontSize:14, color:'white'}}>259</Text>
+                    <Text style={{fontSize:14, color:'gray', marginLeft:4}}>Pending</Text>
                 </View>
-                <View style={{flexDirection:'row',}}>
-                    <Text style={{fontSize:14,color:'white'}}>259</Text>
-                    <Text style={{fontSize:14,color:'gray',marginLeft:4}}>Cancelled</Text>
+                <View style={styles.statItem}>
+                    <Text style={{fontSize:14, color:'white'}}>259</Text>
+                    <Text style={{fontSize:14, color:'gray', marginLeft:4}}>Cancelled</Text>
                 </View>
-                </View> 
             </View>
-            <Text style={{color:'white',fontSize:15,alignSelf:'center',marginTop:10,marginBottom:5}}>My Address</Text>
-            <Text style={{color:'gray',fontSize:13,alignSelf:'center'}}>Khandakar lodge, House-65, Road-2, R.K Road, Rangpur</Text>
-            <View style={{flexDirection:'row',alignSelf:'center',marginTop:20,gap:10}}>
-                <TouchableOpacity style={{height:45,width:'40%',backgroundColor:'#FA6F6F',borderRadius:7,alignItems:'center',justifyContent:'center'}}>
+
+            <Text style={{color:'white', fontSize:15, alignSelf:'center', marginTop:10}}>My Address</Text>
+            <Text style={{color:'gray', fontSize:13, alignSelf:'center'}}>Khandakar lodge, House-65, Road-2, R.K Road, Rangpur</Text>
+
+            {/* Action buttons */}
+            <View style={styles.actionButtonsContainer}>
+                <TouchableOpacity style={styles.logoutButton}>
                     <Text>Log Out</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => router.push({ pathname: "/editprofile" })} style={{height:45,width:'40%',backgroundColor:'#44C178',borderRadius:7,alignItems:'center',justifyContent:'center'}}>
+                <TouchableOpacity onPress={() => router.push({ pathname: "/editprofile" })} style={styles.editProfileButton}>
                     <Text>Edit Profile</Text>
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => router.push({ pathname: "/updatepass" })} style={{height:45,width:'80%',backgroundColor:'#FFB82B',borderRadius:7,alignItems:'center',justifyContent:'center',alignSelf:'center',marginTop:15}}>
-                    <Text>Update Password</Text>
+
+            <TouchableOpacity onPress={() => router.push({ pathname: "/updatepass" })} style={styles.updatePasswordButton}>
+                <Text>Update Password</Text>
             </TouchableOpacity>
-            <Text style={{color:'white',fontSize:12,alignSelf:'center',marginTop:30}}>Follows Us</Text>
-            <View style={{flexDirection:'row',width:'35%',justifyContent:'space-between',alignSelf:'center',marginTop:10}}>
-             <TouchableOpacity><FontAwesome name="instagram" size={20} color="gray" /></TouchableOpacity>
-             <TouchableOpacity><FontAwesome name="facebook" size={20} color="gray" /></TouchableOpacity>
-             <TouchableOpacity><FontAwesome name="twitter" size={20} color="gray" /></TouchableOpacity>
-             <TouchableOpacity><FontAwesome name="linkedin" size={20} color="gray" /></TouchableOpacity>
+
+            <Text style={{color:'white', fontSize:12, alignSelf:'center', marginTop:30}}>Follow Us</Text>
+            <View style={styles.socialIconsContainer}>
+                <TouchableOpacity><FontAwesome name="instagram" size={20} color="gray" /></TouchableOpacity>
+                <TouchableOpacity><FontAwesome name="facebook" size={20} color="gray" /></TouchableOpacity>
+                <TouchableOpacity><FontAwesome name="twitter" size={20} color="gray" /></TouchableOpacity>
+                <TouchableOpacity><FontAwesome name="linkedin" size={20} color="gray" /></TouchableOpacity>
             </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#091242',
-    },
-    backgroundImage: {
-        width: '100%',
-        height: 200, // Adjust based on the background image height
-        position: 'absolute',
-        top: 0,
-        left: 0,
-    },
-    header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        position: 'absolute',
-        top: 30,
-        left: 15,
-        zIndex: 1,
-    },
-    title: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginLeft: 10,
-        color: 'black',
-    },
-    profileImageContainer: {
-        marginTop: 160, // Adjust this to control the spacing from the background image
-        alignItems: 'center',
-    },
+    container: { flex: 1, backgroundColor: '#091242' },
+    backgroundImage: { width: '100%', height: 200, position: 'absolute', top: 0, left: 0 },
+    header: { flexDirection: 'row', alignItems: 'center', position: 'absolute', top: 30, left: 15, zIndex: 1 },
+    title: { fontSize: 18, fontWeight: 'bold', marginLeft: 10, color: 'black' },
+    profileImageContainer: { marginTop: 160, alignItems: 'center' },
+    //cameraIconContainer: { position: 'absolute', bottom: 0, right: 0, backgroundColor: '#E8C001', borderRadius: 15, padding: 3 },
     cameraIconContainer: {
         //position: 'absolute',
         bottom: 30,
@@ -116,11 +126,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'white', // Border to make it look separate from profile image
     },
-    profileImage: {
-        width: 73,
-        height: 73,
-        borderRadius: 40, // Adjusted to make it a perfect circle
-        borderWidth: 3,
-        borderColor: '#0F4E95',
-    },
+    profileImage: { width: 73, height: 73, borderRadius: 40, borderWidth: 3, borderColor: '#0F4E95' },
+    statsContainer: { flexDirection: 'row', justifyContent: 'space-around', marginVertical: 10, width: '80%', alignSelf: 'center' },
+    statItem: { flexDirection: 'row' },
+    actionButtonsContainer: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, width: '80%', alignSelf: 'center' },
+    logoutButton: { height: 45, width: '45%', backgroundColor: '#FA6F6F', borderRadius: 7, justifyContent: 'center', alignItems: 'center' },
+    editProfileButton: { height: 45, width: '45%', backgroundColor: '#44C178', borderRadius: 7, justifyContent: 'center', alignItems: 'center' },
+    updatePasswordButton: { height: 45, width: '80%', backgroundColor: '#FFB82B', borderRadius: 7, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginTop: 15 },
+    socialIconsContainer: { flexDirection: 'row', justifyContent: 'space-between', width: '35%', alignSelf: 'center', marginTop: 10 },
 });
