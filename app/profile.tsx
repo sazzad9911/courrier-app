@@ -54,7 +54,7 @@ export default function Profile() {
             </View>
             <Text style={{color:'white',fontSize:15,alignSelf:'center',marginTop:10,marginBottom:5}}>My Address</Text>
             <Text style={{color:'gray',fontSize:13,alignSelf:'center'}}>Khandakar lodge, House-65, Road-2, R.K Road, Rangpur</Text>
-            <View style={{flexDirection:'row',alignSelf:'center',marginTop:20}}>
+            <View style={{flexDirection:'row',alignSelf:'center',marginTop:20,gap:10}}>
                 <TouchableOpacity style={{height:45,width:'40%',backgroundColor:'#FA6F6F',borderRadius:7,alignItems:'center',justifyContent:'center'}}>
                     <Text>Log Out</Text>
                 </TouchableOpacity>
