@@ -11,9 +11,17 @@ import { getApi } from "@/constants/API";
 import Loader from "@/components/Loader";
 
 interface User {
-  id: string;
-  name: string;
+  address: string;
+  balance: number;
+  businessName: string;
   email: string;
+  id: string;
+  image: string;
+  isAdmin: boolean;
+  name: string;
+  password: string;
+  phone: string;
+  pushToken: string;
 }
 
 interface AuthContextType {
@@ -22,7 +30,7 @@ interface AuthContextType {
   login: (user: User, token: string) => Promise<void>;
   logout: () => Promise<void>;
   isAuthenticated: boolean;
-  reload:() => Promise<void>
+  reload: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -42,7 +50,7 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const [isLoading,setIsLoading]=useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   const login = async (userData: User, authToken: string) => {
     setUser(userData);
@@ -78,7 +86,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUser(JSON.parse(storedUser));
       setToken(storedToken);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -93,10 +101,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         login,
         logout,
         isAuthenticated: !!user,
-        reload
+        reload,
       }}
     >
-      {isLoading?(<Loader visible/>):children}
+      {isLoading ? <Loader visible /> : children}
     </AuthContext.Provider>
   );
 };

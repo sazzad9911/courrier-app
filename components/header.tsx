@@ -4,9 +4,12 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import { useAuth } from '@/providers/AuthContext';
 
 
 export default function header() {
+  const {user}=useAuth()
+  //console.log(user)
   return (
     <View>
       <ThemedView style={styles.headerContainer}>
@@ -20,11 +23,11 @@ export default function header() {
           />
         </ThemedView>
         {/* Balance Information */}
-        <ThemedText style={styles.balanceText}>44.00 BDT</ThemedText>
+        <ThemedText style={styles.balanceText}>{user?.balance.toFixed(2)} BDT</ThemedText>
         {/* Profile Image */}
         <TouchableOpacity onPress={() => router.push({ pathname: "/profile" })}>
           <Image
-            source={require('../assets/images/car.png')}
+            source={user?.image?user.image:require('../assets/images/user.png')}
             style={styles.profileImage}
           />
         </TouchableOpacity>

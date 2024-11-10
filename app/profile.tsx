@@ -2,9 +2,11 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
 import { AntDesign, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { router, useNavigation } from 'expo-router';
+import { useAuth } from '@/providers/AuthContext';
 
 export default function Profile() {
     const navigation = useNavigation();
+    const {user}=useAuth()
   
     return (
         <View style={styles.container}>
@@ -23,15 +25,15 @@ export default function Profile() {
             </View>
 
             {/* Profile Image below the background */}
-            <TouchableOpacity style={styles.profileImageContainer}>
+            <View style={styles.profileImageContainer}>
                 <Image
-                    source={require('../assets/images/proimg.png')}
+                    source={require('../assets/images/user.png')}
                     style={styles.profileImage}
                 />
                 <TouchableOpacity style={styles.cameraIconContainer}>
                     <Ionicons name="camera" size={12} color="white" />
                 </TouchableOpacity>
-            </TouchableOpacity>
+            </View>
             <Text style={{fontSize:18,color:'white',alignSelf:'center',marginTop:20}}>MD Sagor Ali</Text>
             <Text style={{fontSize:14,color:'gray',alignSelf:'center',marginTop:4}}>Banglamart Ecommerce Limited</Text>
             <View style={{marginVertical:10,borderWidth:1,height:45,width:'80%',alignSelf:'center',borderRadius:7,borderColor:'gray',padding:5,justifyContent:'center',}}>
