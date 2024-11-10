@@ -3,13 +3,11 @@ import React, { useState } from 'react';
 import { AntDesign, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { router, useNavigation } from 'expo-router';
 
-export default function editprofile() {
+export default function updatepass() {
     const navigation = useNavigation();
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
-    const [bname, setBname] = useState('');
-    const [address, setAddress] = useState('');
+    const [opass, setOpass] = useState('');
+    const [npass, setNpass] = useState('');
+    const [cpass, setCpass] = useState('');
   return (
     <View style={styles.container}>
             {/* Background image */}
@@ -23,7 +21,7 @@ export default function editprofile() {
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <AntDesign name="left" size={20} color="black" />
                 </TouchableOpacity>
-                <Text style={styles.title}>Edit Profile</Text>
+                <Text style={styles.title}>Update Password</Text>
             </View>
 
             {/* Profile Image below the background */}
@@ -32,42 +30,29 @@ export default function editprofile() {
                     source={require('../assets/images/proimg.png')}
                     style={styles.profileImage}
                 />
-                <TouchableOpacity style={styles.cameraIconContainer}>
+                <View style={styles.cameraIconContainer}>
                     <Ionicons name="camera" size={12} color="white" />
-                </TouchableOpacity>
+                </View>
             </View>
             <View style={{paddingHorizontal:10}}>
                 <TextInput
-                placeholder="Your Name"
-                value={name}
-                onChangeText={setName}
+                placeholder="Old Password"
+                value={opass}
+                onChangeText={setOpass}
                 style={styles.input}
             />
                 <TextInput
-                placeholder="Phone Number"
-                value={phone}
-                onChangeText={setPhone}
+                placeholder="New Password"
+                value={npass}
+                onChangeText={setNpass}
                 style={styles.input}
             />
                 <TextInput
-                    placeholder="Email"
-                    value={email}
-                    onChangeText={setEmail}
+                    placeholder="Confirm New Password"
+                    value={cpass}
+                    onChangeText={setCpass}
                     style={styles.input}
                 />
-                <TextInput
-                    placeholder="Business Name"
-                    value={bname}
-                    onChangeText={setBname}
-                    style={styles.input}
-                />
-                <TextInput
-                placeholder="Address"
-                value={address}
-                onChangeText={setAddress}
-                style={[styles.input, styles.noteInput]} // Apply additional style for note input
-                multiline={true} // Allow multiline input
-            />
             <TouchableOpacity style={styles.updateButton}>
                 <Text style={styles.updateButtonText}>Update</Text>
             </TouchableOpacity>
