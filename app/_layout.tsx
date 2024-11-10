@@ -113,6 +113,14 @@ export default function RootLayout() {
                 }}
               />
               <Stack.Screen
+                name="updatepass"
+                options={{
+                  //headerStyle: { backgroundColor: '#091242' },
+                  //headerTintColor: '#fff', // Sets the header text color to white
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
                 name="(tabs)"
                 options={{ header: () => <Header /> }}
               />

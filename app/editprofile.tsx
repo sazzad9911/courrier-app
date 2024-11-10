@@ -122,7 +122,8 @@ export default function EditProfile() {
             style={[styles.input, styles.noteInput]} // Apply additional style for note input
             multiline={true} // Allow multiline input
           />
-          <TouchableOpacity onPress={handleUpdate}
+          <TouchableOpacity
+            onPress={handleUpdate}
             style={[
               styles.updateButton,
               email && phone && name && bname && address

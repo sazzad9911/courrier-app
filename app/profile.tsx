@@ -65,7 +65,7 @@ export default function Profile() {
                     <Text>Edit Profile</Text>
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity style={{height:45,width:'80%',backgroundColor:'#FFB82B',borderRadius:7,alignItems:'center',justifyContent:'center',alignSelf:'center',marginTop:15}}>
+            <TouchableOpacity onPress={() => router.push({ pathname: "/updatepass" })} style={{height:45,width:'80%',backgroundColor:'#FFB82B',borderRadius:7,alignItems:'center',justifyContent:'center',alignSelf:'center',marginTop:15}}>
                     <Text>Update Password</Text>
             </TouchableOpacity>
             <Text style={{color:'white',fontSize:12,alignSelf:'center',marginTop:30}}>Follows Us</Text>
