@@ -6,7 +6,7 @@ import { useAuth } from '@/providers/AuthContext';
 
 export default function Profile() {
     const navigation = useNavigation();
-    const {user}=useAuth()
+    const {user,logout}=useAuth()
   
     return (
         <View style={styles.container}>
@@ -27,15 +27,15 @@ export default function Profile() {
             {/* Profile Image below the background */}
             <View style={styles.profileImageContainer}>
                 <Image
-                    source={require('../assets/images/user.png')}
+                    source={user?.image?{uri:user.image}:require('../assets/images/user.png')}
                     style={styles.profileImage}
                 />
                 <TouchableOpacity style={styles.cameraIconContainer}>
                     <Ionicons name="camera" size={12} color="white" />
                 </TouchableOpacity>
             </View>
-            <Text style={{fontSize:18,color:'white',alignSelf:'center',marginTop:20}}>MD Sagor Ali</Text>
-            <Text style={{fontSize:14,color:'gray',alignSelf:'center',marginTop:4}}>Banglamart Ecommerce Limited</Text>
+            <Text style={{fontSize:18,color:'white',alignSelf:'center',marginTop:20}}>{user?.name}</Text>
+            <Text style={{fontSize:14,color:'gray',alignSelf:'center',marginTop:4}}>{user?.businessName}</Text>
             <View style={{marginVertical:10,borderWidth:1,height:45,width:'80%',alignSelf:'center',borderRadius:7,borderColor:'gray',padding:5,justifyContent:'center',}}>
                <View style={{marginHorizontal:5,flexDirection:'row',alignContent:'space-between',justifyContent:'space-between'}}>
                 <View style={{flexDirection:'row',}}>
@@ -53,9 +53,12 @@ export default function Profile() {
                 </View> 
             </View>
             <Text style={{color:'white',fontSize:15,alignSelf:'center',marginTop:10,marginBottom:5}}>My Address</Text>
-            <Text style={{color:'gray',fontSize:13,alignSelf:'center'}}>Khandakar lodge, House-65, Road-2, R.K Road, Rangpur</Text>
+            <Text style={{color:'gray',fontSize:13,alignSelf:'center'}}>{user?.address}</Text>
             <View style={{flexDirection:'row',alignSelf:'center',marginTop:20,gap:10}}>
-                <TouchableOpacity style={{height:45,width:'40%',backgroundColor:'#FA6F6F',borderRadius:7,alignItems:'center',justifyContent:'center'}}>
+                <TouchableOpacity onPress={async()=>{
+                    await logout()
+                    router.replace("/login")
+                }} style={{height:45,width:'40%',backgroundColor:'#FA6F6F',borderRadius:7,alignItems:'center',justifyContent:'center'}}>
                     <Text>Log Out</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => router.push({ pathname: "/editprofile" })} style={{height:45,width:'40%',backgroundColor:'#44C178',borderRadius:7,alignItems:'center',justifyContent:'center'}}>
