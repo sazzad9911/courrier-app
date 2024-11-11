@@ -5,16 +5,16 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInput,
-  KeyboardAvoidingView,
-  ScrollView,
+  Alert,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
-import { router, useNavigation } from "expo-router";
+import React, { useState } from "react";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "expo-router";
+import * as ImagePicker from "expo-image-picker";
 import { useAuth } from "@/providers/AuthContext";
-import { postApi } from "@/constants/API";
-import { useLoader } from "@/providers/LoaderContext";
 import { useAlert } from "@/providers/AlertContext";
+import { useLoader } from "@/providers/LoaderContext";
+import { postApi } from "@/constants/API";
 
 export default function EditProfile() {
   const navigation = useNavigation();
@@ -23,122 +23,129 @@ export default function EditProfile() {
   const [email, setEmail] = useState("");
   const [bname, setBname] = useState("");
   const [address, setAddress] = useState("");
-  const { user, token, login } = useAuth();
-  const { hideLoader, showLoader } = useLoader();
+  const { login, user, token } = useAuth();
   const { showAlert } = useAlert();
+  const { showLoader, hideLoader } = useLoader();
 
-  useEffect(() => {
-    if (user) {
-      setName(user.name);
-      setPhone(user.phone);
-      setBname(user.businessName);
-      setEmail(user.email);
-      setAddress(user.address);
-    }
-  }, [user]);
+  // State for storing the profile image URI
+  const [profileImageUri, setProfileImageUri] = useState(
+    require("../assets/images/user.png")
+  );
 
-  const handleUpdate = async () => {
-    try {
-      showLoader();
-      const res = await postApi(
-        "/apis/user/update-user-info",
-        token || undefined,
-        {
-          name: name,
-          phone: phone,
-          email: email,
-          businessName: bname,
-          address: address,
-        }
+  // Function to handle image selection from device
+  const handleImagePick = async () => {
+    // Request permission to access the media library
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== "granted") {
+      Alert.alert(
+        "Permission Denied",
+        "You need to grant permission to change the profile picture."
       );
-      login(res.data.updateInfo, token || "");
-      showAlert('success',"User updated")
-    } catch (error: any) {
-      showAlert("error", error.response.data.error);
-    } finally {
-      hideLoader();
+      return;
+    }
+    // Launch image picker
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1], // Square aspect ratio
+      quality: 1,
+    });
+
+    // Update the profile image if an image is selected
+    if (!result.canceled && result.assets && result.assets.length > 0) {
+      setProfileImageUri({ uri: result.assets[0].uri });
     }
   };
 
+const handleUpdate = async () => {
+  try {
+    const res=await postApi("/apis/user/update-user-info",token||"",{
+        name:name,
+        phone:phone,
+        email:email,
+        businessName:bname,
+        address:address
+    })
+    login(res.data.updateInfo, token || "");
+    showAlert("success", "User updated");
+  } catch (error: any) {
+    showAlert("error", error.response.data.error);
+  } finally {
+    hideLoader();
+  }
+
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }}>
-      <ScrollView style={styles.container}>
-        {/* Background image */}
-        <Image
-          source={require("../assets/images/proback.png")}
-          style={styles.backgroundImage}
-        />
+    <View style={styles.container}>
+      {/* Background image */}
+      <Image
+        source={require("../assets/images/proback.png")}
+        style={styles.backgroundImage}
+      />
 
-        {/* Header with back arrow and title over the background image */}
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <AntDesign name="left" size={20} color="black" />
-          </TouchableOpacity>
-          <Text style={styles.title}>Edit Profile</Text>
-        </View>
-
-        {/* Profile Image below the background */}
-        <TouchableOpacity style={styles.profileImageContainer}>
-          <Image
-            source={
-              user?.image
-                ? { uri: user.image }
-                : require("../assets/images/user.png")
-            }
-            style={styles.profileImage}
-          />
-          <TouchableOpacity style={styles.cameraIconContainer}>
-            <Ionicons name="camera" size={12} color="white" />
-          </TouchableOpacity>
+      {/* Header with back arrow and title */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <AntDesign name="left" size={20} color="black" />
         </TouchableOpacity>
-        <View style={{ paddingHorizontal: 10 }}>
-          <TextInput
-            placeholder="Your Name"
-            value={name}
-            onChangeText={setName}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Phone Number"
-            value={phone}
-            onChangeText={setPhone}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Business Name"
-            value={bname}
-            onChangeText={setBname}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Address"
-            value={address}
-            onChangeText={setAddress}
-            style={[styles.input, styles.noteInput]} // Apply additional style for note input
-            multiline={true} // Allow multiline input
-          />
-          <TouchableOpacity
-            onPress={handleUpdate}
-            style={[
-              styles.updateButton,
-              email && phone && name && bname && address
-                ? styles.updateButtonAct
-                : null,
-            ]}
-          >
-            <Text style={styles.updateButtonText}>Update</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        <Text style={styles.title}>Edit Profile</Text>
+      </View>
+
+      {/* Profile Image Section */}
+      <View style={styles.profileImageContainer}>
+        <Image
+          source={profileImageUri} // Display selected or default profile image
+          style={styles.profileImage}
+        />
+        <TouchableOpacity
+          style={styles.cameraIconContainer}
+          onPress={handleImagePick}
+        >
+          <Ionicons name="camera" size={12} color="white" />
+        </TouchableOpacity>
+      </View>
+
+      {/* Input Fields */}
+      <View style={{ paddingHorizontal: 10 }}>
+        <TextInput
+          placeholder="Your Name"
+          value={name}
+          onChangeText={setName}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Phone Number"
+          value={phone}
+          onChangeText={setPhone}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Business Name"
+          value={bname}
+          onChangeText={setBname}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Address"
+          value={address}
+          onChangeText={setAddress}
+          style={[styles.input, styles.noteInput]}
+          multiline={true}
+        />
+        <TouchableOpacity style={styles.updateButton}>
+          <Text style={styles.updateButtonText}>Update</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
+};
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -146,7 +153,7 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     width: "100%",
-    height: 200, // Adjust based on the background image height
+    height: 200,
     position: "absolute",
     top: 0,
     left: 0,
@@ -166,23 +173,22 @@ const styles = StyleSheet.create({
     color: "black",
   },
   profileImageContainer: {
-    marginTop: 160, // Adjust this to control the spacing from the background image
+    marginTop: 160,
     alignItems: "center",
   },
   cameraIconContainer: {
-    //position: 'absolute',
     bottom: 30,
     right: -30,
-    backgroundColor: "#E8C001", // Icon background color
+    backgroundColor: "#E8C001",
     borderRadius: 15,
     padding: 3,
     borderWidth: 1,
-    borderColor: "white", // Border to make it look separate from profile image
+    borderColor: "white",
   },
   profileImage: {
     width: 73,
     height: 73,
-    borderRadius: 40, // Adjusted to make it a perfect circle
+    borderRadius: 40,
     borderWidth: 3,
     borderColor: "#0F4E95",
   },
@@ -195,13 +201,10 @@ const styles = StyleSheet.create({
     color: "#000",
   },
   noteInput: {
-    height: 80, // Set the desired height for the Note input
-  },
-  updateButtonAct: {
-    backgroundColor: "#FFB82B",
+    height: 80,
   },
   updateButton: {
-    backgroundColor: "gray",
+    backgroundColor: "#FFB82B",
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: "center",
@@ -210,6 +213,5 @@ const styles = StyleSheet.create({
   },
   updateButtonText: {
     color: "#000000",
-    //fontWeight: 'bold',
   },
-});
+})
