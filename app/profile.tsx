@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     profileImage: { width: 73, height: 73, borderRadius: 40, borderWidth: 3, borderColor: '#0F4E95' },
     statsContainer: { flexDirection: 'row', justifyContent: 'space-around', marginVertical: 10, width: '80%', alignSelf: 'center' },
     statItem: { flexDirection: 'row' },
-    actionButtonsContainer: { flexDirection: 'row',  marginTop: 20,justifyContent:'center', width: '90%', alignSelf: 'center' },
+    actionButtonsContainer: { flexDirection: 'row',  marginTop: 20,justifyContent:'center', width: '90%', alignSelf: 'center',gap:10 },
     logoutButton: { height: 45, width: '45%', backgroundColor: '#FA6F6F', borderRadius: 7, justifyContent: 'center', alignItems: 'center' },
     editProfileButton: { height: 45, width: '45%', backgroundColor: '#44C178', borderRadius: 7, justifyContent: 'center', alignItems: 'center' },
     updatePasswordButton: { height: 45, width: '80%', backgroundColor: '#FFB82B', borderRadius: 7, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', marginTop: 15 },
