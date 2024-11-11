@@ -52,6 +52,7 @@ export default function EditProfile() {
         }
       );
       login(res.data.updateInfo, token || "");
+      showAlert('success',"User updated")
     } catch (error: any) {
       showAlert("error", error.response.data.error);
     } finally {
