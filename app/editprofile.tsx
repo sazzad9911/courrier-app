@@ -57,99 +57,100 @@ export default function EditProfile() {
     }
   };
 
-const handleUpdate = async () => {
-  try {
-    const res=await postApi("/apis/user/update-user-info",token||"",{
-        name:name,
-        phone:phone,
-        email:email,
-        businessName:bname,
-        address:address
-    })
-    login(res.data.updateInfo, token || "");
-    showAlert("success", "User updated");
-  } catch (error: any) {
-    showAlert("error", error.response.data.error);
-  } finally {
-    hideLoader();
-  }
+  const handleUpdate = async () => {
+    try {
+      const res = await postApi("/apis/user/update-user-info", token || "", {
+        name: name,
+        phone: phone,
+        email: email,
+        businessName: bname,
+        address: address,
+      });
+      login(res.data.updateInfo, token || "");
+      showAlert("success", "User updated");
+    } catch (error: any) {
+      showAlert("error", error.response.data.error);
+    } finally {
+      hideLoader();
+    }
 
-  return (
-    <View style={styles.container}>
-      {/* Background image */}
-      <Image
-        source={require("../assets/images/proback.png")}
-        style={styles.backgroundImage}
-      />
-
-      {/* Header with back arrow and title */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <AntDesign name="left" size={20} color="black" />
-        </TouchableOpacity>
-        <Text style={styles.title}>Edit Profile</Text>
-      </View>
-
-      {/* Profile Image Section */}
-      <View style={styles.profileImageContainer}>
+    return (
+      <View style={styles.container}>
+        {/* Background image */}
         <Image
-          source={profileImageUri} // Display selected or default profile image
-          style={styles.profileImage}
+          source={require("../assets/images/proback.png")}
+          style={styles.backgroundImage}
         />
-        <TouchableOpacity
-          style={styles.cameraIconContainer}
-          onPress={handleImagePick}
-        >
-          <Ionicons name="camera" size={12} color="white" />
-        </TouchableOpacity>
-      </View>
 
-      {/* Input Fields */}
-      <View style={{ paddingHorizontal: 10 }}>
-        <TextInput
-          placeholder="Your Name"
-          value={name}
-          onChangeText={setName}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Phone Number"
-          value={phone}
-          onChangeText={setPhone}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Business Name"
-          value={bname}
-          onChangeText={setBname}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Address"
-          value={address}
-          onChangeText={setAddress}
-          style={[styles.input, styles.noteInput]}
-          multiline={true}
-        />
-        <TouchableOpacity style={styles.updateButton}>
-          <Text style={styles.updateButtonText}>Update</Text>
-        </TouchableOpacity>
+        {/* Header with back arrow and title */}
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <AntDesign name="left" size={20} color="black" />
+          </TouchableOpacity>
+          <Text style={styles.title}>Edit Profile</Text>
+        </View>
+
+        {/* Profile Image Section */}
+        <View style={styles.profileImageContainer}>
+          <Image
+            source={profileImageUri} // Display selected or default profile image
+            style={styles.profileImage}
+          />
+          <TouchableOpacity
+            style={styles.cameraIconContainer}
+            onPress={handleImagePick}
+          >
+            <Ionicons name="camera" size={12} color="white" />
+          </TouchableOpacity>
+        </View>
+
+        {/* Input Fields */}
+        <View style={{ paddingHorizontal: 10 }}>
+          <TextInput
+            placeholder="Your Name"
+            value={name}
+            onChangeText={setName}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Phone Number"
+            value={phone}
+            onChangeText={setPhone}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Business Name"
+            value={bname}
+            onChangeText={setBname}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Address"
+            value={address}
+            onChangeText={setAddress}
+            style={[styles.input, styles.noteInput]}
+            multiline={true}
+          />
+          <TouchableOpacity style={styles.updateButton}>
+            <Text style={styles.updateButtonText}>Update</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  );
-};
+    );
+  };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#091242",
+  
   },
   backgroundImage: {
     width: "100%",
@@ -214,4 +215,4 @@ const styles = StyleSheet.create({
   updateButtonText: {
     color: "#000000",
   },
-})
+});
