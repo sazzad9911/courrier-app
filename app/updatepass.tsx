@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInput,
+  ScrollView,
 } from "react-native";
 import React, { useState } from "react";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
@@ -38,13 +39,14 @@ export default function updatepass() {
       showAlert("success", "Password updated");
       router.back()
     } catch (error: any) {
+      console.log(error.response.data)
       showAlert("error", error.response.data.error);
     } finally {
       hideLoader();
     }
   };
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {/* Background image */}
       <Image
         source={require("../assets/images/proback.png")}
@@ -69,9 +71,9 @@ export default function updatepass() {
           }
           style={styles.profileImage}
         />
-        <View style={styles.cameraIconContainer}>
+        {/* <View style={styles.cameraIconContainer}>
           <Ionicons name="camera" size={12} color="white" />
-        </View>
+        </View> */}
       </View>
       <View style={{ paddingHorizontal: 10 }}>
         <TextInput
@@ -96,7 +98,7 @@ export default function updatepass() {
           <Text style={styles.updateButtonText}>Update</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
@@ -128,6 +130,7 @@ const styles = StyleSheet.create({
   profileImageContainer: {
     marginTop: 160, // Adjust this to control the spacing from the background image
     alignItems: "center",
+    marginBottom:20
   },
   cameraIconContainer: {
     //position: 'absolute',

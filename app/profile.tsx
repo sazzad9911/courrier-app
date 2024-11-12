@@ -6,19 +6,24 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { router, useNavigation } from "expo-router";
 import { useAuth } from "@/providers/AuthContext";
 import * as ImagePicker from "expo-image-picker";
+import { useAlert } from "@/providers/AlertContext";
+import { useLoader } from "@/providers/LoaderContext";
+import uploadPicture from "@/constants/uploadPicture";
 
 export default function Profile() {
   const navigation = useNavigation();
-  const { user } = useAuth();
+  const { user, token, login, logout } = useAuth();
+  const { showAlert } = useAlert();
+  const { showLoader, hideLoader } = useLoader();
 
   // State to store the selected profile image URI
   const [profileImageUri, setProfileImageUri] = useState(
-    require("../assets/images/user.png")
+    user?.image ? { uri: user.image } : require("../assets/images/user.png")
   );
 
   // Function to handle image picking and updating the profile picture
@@ -41,11 +46,36 @@ export default function Profile() {
       quality: 1,
     });
 
-    // Update the profile image if an image is selected
     if (!result.canceled && result.assets && result.assets.length > 0) {
-      setProfileImageUri({ uri: result.assets[0].uri });
+      showLoader();
+      try {
+        const uri = result.assets[0].uri;
+        const res = await uploadPicture(
+          "/apis/user/upload-picture",
+          token || "",
+          uri
+        );
+        if (!res.ok) {
+          showAlert("error", "Uploading picture failed");
+          throw new Error("Uploading picture failed");
+        }
+        const data = await res.json();
+        setProfileImageUri({ uri: uri });
+        login(data, token || "");
+        showAlert("success", "Upload successful");
+      } catch (error: any) {
+        //showAlert("error", error.response.data.error);
+        console.log(error);
+      } finally {
+        hideLoader();
+      }
     }
   };
+  useEffect(() => {
+    setProfileImageUri(
+      user?.image ? { uri: user.image } : require("../assets/images/user.png")
+    );
+  }, [user]);
 
   return (
     <View style={styles.container}>
@@ -85,7 +115,7 @@ export default function Profile() {
           marginTop: 20,
         }}
       >
-        MD Sagor Ali
+        {user?.name}
       </Text>
       <Text
         style={{
@@ -95,7 +125,7 @@ export default function Profile() {
           marginTop: 4,
         }}
       >
-        Banglamart Ecommerce Limited
+        {user?.businessName}
       </Text>
 
       {/* User stats */}
@@ -131,12 +161,18 @@ export default function Profile() {
         My Address
       </Text>
       <Text style={{ color: "gray", fontSize: 13, alignSelf: "center" }}>
-        Khandakar lodge, House-65, Road-2, R.K Road, Rangpur
+        {user?.address}
       </Text>
 
       {/* Action buttons */}
       <View style={styles.actionButtonsContainer}>
-        <TouchableOpacity style={styles.logoutButton}>
+        <TouchableOpacity
+          onPress={() => {
+            logout();
+            router.replace("/login");
+          }}
+          style={styles.logoutButton}
+        >
           <Text>Log Out</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -228,7 +264,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingVertical: 10,
     borderColor: "gray",
-    borderRadius:10
+    borderRadius: 10,
   },
   statItem: { flexDirection: "row" },
   actionButtonsContainer: {

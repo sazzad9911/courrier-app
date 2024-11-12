@@ -25,7 +25,14 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
-        tabBarStyle: { backgroundColor: "#224B26",borderTopEndRadius:8,borderTopStartRadius:8 },
+        tabBarStyle: {
+          backgroundColor: "#224B26",
+          borderTopEndRadius: 8,
+          borderTopStartRadius: 8,
+          paddingBottom: 5,
+          paddingTop: 5,
+        },
+        tabBarInactiveTintColor:"#fff"
       }}
     >
       <Tabs.Screen
@@ -58,9 +65,10 @@ export default function TabLayout() {
       <Tabs.Screen
         name="pickup"
         options={{
-          title: "Pick Up",
+          title: "Fraud Check",
           tabBarIcon: ({ color, focused }) => (
-            <MaterialCommunityIcons name="car-pickup" color={color} size={30} />
+            <MaterialCommunityIcons name="account-alert" size={30} color={color} />
+      
           ),
         }}
       />
