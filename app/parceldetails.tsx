@@ -5,7 +5,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 
-export default function parceldetails() {
+export default function ParcelDetails() {
   return (
     <ScrollView style={{flex:1,backgroundColor: '#091242'}}>
       <ThemedView style={styles.bodyContainer}>

@@ -5,6 +5,7 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 interface LoaderContextType {
   showLoader: () => void;
   hideLoader: () => void;
+  isLoading: boolean;
 }
 
 const LoaderContext = createContext<LoaderContextType | undefined>(undefined);
@@ -28,7 +29,9 @@ export const LoaderProvider: React.FC<LoaderProviderProps> = ({ children }) => {
   const hideLoader = () => setVisible(false);
 
   return (
-    <LoaderContext.Provider value={{ showLoader, hideLoader }}>
+    <LoaderContext.Provider
+      value={{ showLoader, hideLoader, isLoading: visible }}
+    >
       {children}
       <Loader visible={visible} />
     </LoaderContext.Provider>

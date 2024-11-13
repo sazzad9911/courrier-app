@@ -157,8 +157,8 @@ export default function AddParcel() {
     }
   };
   return (
-    <ScrollView style={{ flex: 1 }}>
-      <ThemedView style={styles.bodyContainer}>
+    <ScrollView style={styles.bodyContainer}>
+      <ThemedView style={{flex:1}}>
         <Text
           style={{
             fontSize: 20,
@@ -190,7 +190,7 @@ export default function AddParcel() {
 
         <View style={styles.optionsContainer}>
           {["Regular", "Express", "Pick & Drop"].map((doc, i) => (
-            <TouchableOpacity
+            <TouchableOpacity key={i}
               style={[
                 styles.optionButton,
                 selectedOption === doc && styles.selected,
@@ -340,12 +340,14 @@ export default function AddParcel() {
           value={phoneNumber}
           onChangeText={setPhoneNumber}
           style={styles.input}
+          keyboardType={"phone-pad"}
         />
         <TextInput
           placeholder="Cash on Delivery amount"
           value={deliveryAmount}
           onChangeText={setDeliveryAmount}
           style={styles.input}
+          keyboardType={"number-pad"}
         />
         <TextInput
           placeholder="Name"
