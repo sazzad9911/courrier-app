@@ -1,6 +1,6 @@
 import axios from "axios"
-//export const domain = 'https://courrier-three.vercel.app'
-export const domain = 'http://192.168.1.24:3000'
+export const domain = 'https://courrier-three.vercel.app'
+//export const domain = 'http://192.168.1.24:3000'
 
 const getApi = async (url: string, token?: string, params?: any) => await axios.get(`${domain}${url}`, {
     headers: { Authorization: 'Bearer ' + token },
